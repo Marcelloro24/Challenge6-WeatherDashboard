@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Dashboard</title>
+    <link rel="stylesheet" href="Assets/CSS/Style.css">
+</head>
+<body>
+    <!-- Header section -->
+    <header>
+        <h1>Weather Dashboard</h1>
+    </header>
+
+    <!-- Main content section -->
+    <main>
+        <!-- Search section -->
+        <aside id="search-section">
+            <h2>Search for a City:</h2>
+            <div class="search-container">
+                <input type="text" id="city-input" placeholder="San Diego">
+                <button id="search-btn">Search</button>
+            </div>
+            <hr>
+            <!-- Search history -->
+            <div id="search-history">
+                <button class="history-btn">Atlanta</button>
+                <button class="history-btn">Denver</button>
+                <button class="history-btn">Seattle</button>
+                <button class="history-btn">San Francisco</button>
+                <button class="history-btn">Orlando</button>
+                <button class="history-btn">New York</button>
+                <button class="history-btn">Chicago</button>
+                <button class="history-btn">Austin</button>
+            </div>
+        </aside>
+
+        <!-- Weather display section -->
+        <section id="weather-section">
+            <!-- Current weather -->
+            <div id="current-weather">
+                <!-- This section will be populated dynamically using JavaScript and the OpenWeatherMap API -->
+                <h2 id="city-date-icon">Loading...</h2>
+                <p id="temperature">Temperature: --</p>
+                <p id="wind">Wind: --</p>
+                <p id="humidity">Humidity: --</p>
+            </div>
+
+            <!-- 5-day forecast -->
+            <div id="forecast">
+                <h3>5-Day Forecast:</h3>
+                <div class="forecast-container" id="forecast-container">
+                    <!-- This section will be populated dynamically using JavaScript and the OpenWeatherMap API -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="Assets/JS/script.js"></script>
+</body>
+</html>
