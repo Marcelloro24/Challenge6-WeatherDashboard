@@ -3,7 +3,6 @@
 // API Configuration
 // Replace 'YOUR_API_KEY_HERE' with your actual OpenWeatherMap API key
 const API_KEY = '0860f19e5f75c9c18ceb18cd26f4a4c7';
-const BASE_URL = 'https://api.openweathermap.org/data/2.5';
 
 // DOM Elements
 // Get references to important elements in the HTML
@@ -42,7 +41,7 @@ function handleHistoryClick(event) {
 async function getWeatherData(city) {
     try {
         // First, get coordinates for the city
-        const geoUrl = `${BASE_URL}/geo/1.0/direct?q=${city}&limit=1&appid=${API_KEY}`;
+        const geoUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${API_KEY}`;
         const geoResponse = await fetch(geoUrl);
         const geoData = await geoResponse.json();
         console.log("Geo Data: ", geoData);
@@ -54,7 +53,7 @@ async function getWeatherData(city) {
         const { lat, lon } = geoData[0];
 
         // Then, get 5 day / 3 hour forecast data using coordinates
-        const forecastUrl = `${BASE_URL}/forecast?lat=${lat}&lon=${lon}&units=imperial&appid=${API_KEY}`;
+        const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&appid=${API_KEY}`;
         const forecastResponse = await fetch(forecastUrl);
         const forecastData = await forecastResponse.json();
         console.log("Forecast Data: ", forecastData);
