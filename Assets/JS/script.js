@@ -41,7 +41,7 @@ function handleHistoryClick(event) {
 async function getWeatherData(city) {
     try {
         // First, get coordinates for the city
-        const geoUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${API_KEY}`;
+        const geoUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${API_KEY}`;
         const geoResponse = await fetch(geoUrl);
         const geoData = await geoResponse.json();
         console.log("Geo Data: ", geoData);
@@ -71,7 +71,7 @@ function updateWeatherDisplay(data) {
     const current = data.list[0];
     currentWeather.innerHTML = `
         <h2>${data.city.name} (${new Date(current.dt * 1000).toLocaleDateString()}) 
-            <img src="http://openweathermap.org/img/wn/${current.weather[0].icon}.png" alt="${current.weather[0].description}">
+            <img src="https://openweathermap.org/img/wn/${current.weather[0].icon}.png" alt="${current.weather[0].description}">
         </h2>
         <p>Temp: ${current.main.temp.toFixed(2)}°F</p>
         <p>Wind: ${current.wind.speed.toFixed(2)} MPH</p>
@@ -86,7 +86,7 @@ function updateWeatherDisplay(data) {
         forecastCard.classList.add('forecast-card');
         forecastCard.innerHTML = `
             <h4>${new Date(day.dt * 1000).toLocaleDateString()}</h4>
-            <img src="http://openweathermap.org/img/wn/${day.weather[0].icon}.png" alt="${day.weather[0].description}">
+            <img src="https://openweathermap.org/img/wn/${day.weather[0].icon}.png" alt="${day.weather[0].description}">
             <p>Temp: ${day.main.temp.toFixed(2)}°F</p>
             <p>Wind: ${day.wind.speed.toFixed(2)} MPH</p>
             <p>Humidity: ${day.main.humidity}%</p>
