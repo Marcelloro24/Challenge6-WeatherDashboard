@@ -1,21 +1,20 @@
 // Weather Dashboard JavaScript
 
 // API Configuration
-// Replace 'YOUR_API_KEY_HERE' with your actual OpenWeatherMap API key
 const API_KEY = '0860f19e5f75c9c18ceb18cd26f4a4c7';
+let searchHistory = [];
 
 // DOM Elements
-// Get references to important elements in the HTML
 const cityInput = document.getElementById('city-input');
 const searchBtn = document.getElementById('search-btn');
-const searchHistory = document.getElementById('search-history');
+const searchHistoryEl = document.getElementById('search-history');
 const currentWeather = document.getElementById('current-weather');
 const forecastContainer = document.getElementById('forecast-container');
 
 // Event Listeners
-// Add click event listeners to the search button and search history
 searchBtn.addEventListener('click', handleSearch);
-searchHistory.addEventListener('click', handleHistoryClick);
+searchHistoryEl.addEventListener('click', handleHistoryClick);
+document.addEventListener('DOMContentLoaded', renderHistory);
 
 // Main Functions
 
@@ -97,13 +96,36 @@ function updateWeatherDisplay(data) {
 
 // Add a city to the search history
 function addToSearchHistory(city) {
-    const historyBtn = document.createElement('button');
-    historyBtn.classList.add('history-btn');
-    historyBtn.textContent = city;
-    searchHistory.prepend(historyBtn);
-
-    // Limit history to 8 items
-    if (searchHistory.children.length > 8) {
-        searchHistory.removeChild(searchHistory.lastChild);
+    // Check if the city already exists in the search history
+    if (!searchHistory.includes(city)) {
+        const historyBtn = document.createElement('button');
+        historyBtn.classList.add('history-btn');
+        historyBtn.textContent = city;
+        searchHistory.unshift(city); // Add to the beginning of the array
+        
+        // Limit history to 8 items
+        if (searchHistory.length > 8) {
+            searchHistory.pop();
+        }
+        
+        localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
+        searchHistoryEl.prepend(historyBtn);
+        
+        // Remove excess buttons if there are more than 8
+        while (searchHistoryEl.children.length > 8) {
+            searchHistoryEl.removeChild(searchHistoryEl.lastChild);
+        }
     }
+}
+
+function renderHistory() {
+    searchHistory = JSON.parse(localStorage.getItem("searchHistory")) || [];
+    searchHistoryEl.innerHTML = ''; // Clear existing buttons
+    
+    searchHistory.forEach(city => {
+        const historyBtn = document.createElement('button');
+        historyBtn.classList.add('history-btn');
+        historyBtn.textContent = city;
+        searchHistoryEl.appendChild(historyBtn);
+    });
 }
